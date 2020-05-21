@@ -1,0 +1,55 @@
+﻿<Page
+    x:Class="UWPXAML_Button.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPXAML_Button"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Margin="20">
+        <StackPanel>
+
+            <!-- For all these Buttons, the information conveyed through the contained 
+                 TextBlocks is also intentionally conveyed directly through the containing 
+                 Button. As such, it serves no useful purpose to the customer to also
+                 have the TextBlocks exposed through UIA. So remove the TextBlocks 
+                 from the Control View of the UIA tree. -->
+            
+            <!-- Button #1.
+                 This button uses a variety of AutomationProperties
+                 to convey all the information shown on the button. -->
+            <Button Margin="10"
+                AutomationProperties.LabeledBy="{Binding ElementName=SetFavouriteAPI1}"
+                AutomationProperties.ItemStatus="{Binding ElementName=CurrentFavourite1, Path=Text}">
+                <StackPanel>
+                    <TextBlock Name="SetFavouriteAPI1" x:Uid="SetFavouriteAPI1" AutomationProperties.AccessibilityView="Raw" />
+                    <TextBlock Name="CurrentFavourite1"  x:Uid="CurrentFavourite1" AutomationProperties.AccessibilityView="Raw" />
+                </StackPanel>
+            </Button>
+
+            <!-- Button #2.
+                 This button has its accessible name set from its entire content
+                 in code-behind. -->
+            <Button x:Name="SetFavouriteAPI2Button"  Margin="10">
+                <StackPanel>
+                    <TextBlock x:Name="SetFavouriteAPI2" x:Uid="SetFavouriteAPI2" AutomationProperties.AccessibilityView="Raw" />
+                    <TextBlock x:Name="CurrentFavourite2"  x:Uid="CurrentFavourite2" AutomationProperties.AccessibilityView="Raw" />
+                </StackPanel>
+            </Button>
+
+            <!-- Button #3.
+                 This custom button has its accessible name set from its entire content,
+                 using a custom AutomationPeer. -->
+            <local:MyButton Margin="10">
+                <StackPanel>
+                    <TextBlock x:Uid="SetFavouriteAPI3" AutomationProperties.AccessibilityView="Raw" />
+                    <TextBlock x:Uid="CurrentFavourite3" AutomationProperties.AccessibilityView="Raw" />
+                </StackPanel>
+            </local:MyButton>
+
+        </StackPanel>
+    </Grid>
+
+</Page>
